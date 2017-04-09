@@ -30,7 +30,7 @@ To start API:
 ```
 npm start
 ```
-You should now be able to open a web browser and navigate to http://raspberry_pi_IP:3000 and see the swagger-ui
+You should now be able to open a web browser and navigate to http://raspberry_pi_IP:3000/docs and see the swagger-ui
 
 To regenerate the swagger.json file after making changes to the api:
 ```

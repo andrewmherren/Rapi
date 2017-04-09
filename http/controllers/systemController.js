@@ -47,13 +47,13 @@ exports.get = function (request, response) {
  * description: This endpoint allows you to post an allowed command (either sysShutdown or reboot) to be executed by the pi.
  * parameters:
  *   - name: command
- *     in: query
- *     description: Command to execute on the system.
- *     required: true
- *     type: string
- *     enum:
- *       - Shutdown
- *       - Reboot
+ *     in: body
+ *     schema:
+ *       type: object
+ *       properties:
+ *         type: string
+ *         description: Command to execute on the system.
+ *         required: true
  * responses:
  *   200:
  *     description: A string indicating the system status.
