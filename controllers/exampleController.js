@@ -2,6 +2,13 @@
 const execSync = require('child_process').execSync
 
 /*
+ * Register routes to the functions declared in this controller.
+ */
+exports.routs = function(app) {
+  app.get('/api/example', get)
+}
+
+/*
  * @api [get] /example
  * description: This is an example of how to execute a shell command that requires user input. The rAsPI project contains a directory called shell_scripts with a bash scripted called type_something.sh. When executed, it asks the user to type something and waits for input. Once the user types something and preses enter, it prints back what was typed. This endpoing shows how such a script can be executed via the api.
  * responses:
@@ -20,7 +27,7 @@ const execSync = require('child_process').execSync
  *         error:
  *           type: string
  */
-exports.get = function (request, response) {
+const get = function (request, response) {
   let result
   try {
     result = execSync('./type_something.sh', // Execute the type_something script exactly as you would from the commandline.

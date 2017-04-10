@@ -1,11 +1,22 @@
 'use strict'
 
 const swaggerRoutes = require('./docs/swaggerRoutes').routes
-const routes = require('./http/routes').routes
 const bodyParser = require('body-parser')
 const express = require('express')
 const path = require('path')
 const app = express()
+
+require('source-dot-env')()
+
+// initialize the swagger documentation routes
+swaggerRoutes(app)
+
+// Require all all controllers and initialize their routes
+const controllerPath = require("path").join(__dirname, "controllers");
+require("fs").readdirSync(controllerPath).forEach(function (file) {
+  let routes = require("./routes/" + file).routes;
+  routes(app)
+});
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -14,13 +25,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json())
 
 // export the path to the script directory for use elsewhere in the app
-GLOBAL.scriptDir = path.join(__dirname, 'shell_scripts')
+global.scriptDir = path.join(__dirname, 'shell_scripts')
 
-// initialize the routing function (see http/routes.js)
-routes(app)
-// initialize the swagger documentation routes
-swaggerRoutes(app)
-
-// Tell the server to listen to port 3000
-app.listen(3000)
-console.log('Listening on port http://localhost:3000...')
+// Tell the server to listen to the port specified in the .env file.
+app.listen(process.env.PORT)
+console.log('Listening on port http://localhost:' + process.env.PORT + '...')

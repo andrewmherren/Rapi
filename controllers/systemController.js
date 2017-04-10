@@ -2,6 +2,14 @@
 const execSync = require('child_process').execSync
 
 /*
+ * Register routes to the functions declared in this controller.
+ */
+exports.routs = function(app) {
+  app.get('/api/system', get)
+  app.post('/api/system', post)
+}
+
+/*
  * @api [get] /system
  * description: This endpoint executes an awk script in the shell_scripts directory which parses a file to return the rAsPI version number.
  * responses:
@@ -20,7 +28,7 @@ const execSync = require('child_process').execSync
  *         error:
  *           type: string
  */
-exports.get = function (request, response) {
+const get = function (request, response) {
   // Example of how to execute an awk script. cwd tells the script run from the script directory and
   // encoding turns the results into a string
   // syntax is execSync(command, {object of params}, error callback())
@@ -67,7 +75,7 @@ exports.get = function (request, response) {
  *         error:
  *           type: string
  */
-exports.post = function (request, response) {
+const post = function (request, response) {
   switch (request.body.command) {
     case 'Shutdown':
       try {
