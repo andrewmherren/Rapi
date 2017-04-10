@@ -79,12 +79,7 @@
               "properties": {
                 "type": "string",
                 "description": "Command to execute on the system.",
-                "required": true,
-                "example": "Shutdown",
-                "enum": [
-                  "Shutdown",
-                  "Reboot"
-                ]
+                "required": true
               }
             }
           }

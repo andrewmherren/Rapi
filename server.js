@@ -12,11 +12,14 @@ require('source-dot-env')()
 swaggerRoutes(app)
 
 // Require all all controllers and initialize their routes
-const controllerPath = require("path").join(__dirname, "controllers");
+const controllerPath = require("path").join(__dirname, "controllers")
 require("fs").readdirSync(controllerPath).forEach(function (file) {
-  let routes = require("./routes/" + file).routes;
+  // Join the path to the file name
+  file = path.join(controllerPath, file)
+  console.log('loading ' + file + '...')
+  let routes = require(file).routes
   routes(app)
-});
+})
 
 app.use(bodyParser.urlencoded({
   extended: true

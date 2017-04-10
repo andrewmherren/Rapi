@@ -4,7 +4,7 @@ const execSync = require('child_process').execSync
 /*
  * Register routes to the functions declared in this controller.
  */
-exports.routs = function(app) {
+exports.routes = function(app) {
   app.get('/api/example', get)
 }
 
@@ -32,7 +32,7 @@ const get = function (request, response) {
   try {
     result = execSync('./type_something.sh', // Execute the type_something script exactly as you would from the commandline.
       {
-        cwd: GLOBAL.scriptDir, // This is the directory the command needs to be executed from
+        cwd: global.scriptDir, // This is the directory the command needs to be executed from
         input: 'The rAsPI typed this!', // This acts as though it was typed on the command line
         encoding: 'utf-8' // This tells execSync to return the result as a string
       }

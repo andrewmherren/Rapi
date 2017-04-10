@@ -4,7 +4,7 @@ const execSync = require('child_process').execSync
 /*
  * Register routes to the functions declared in this controller.
  */
-exports.routs = function(app) {
+exports.routes = function(app) {
   app.get('/api/system', get)
   app.post('/api/system', post)
 }
@@ -37,7 +37,7 @@ const get = function (request, response) {
     rAsPIver = execSync(
       'awk -f rAsPI_version.awk ../package.json',
       {
-        cwd: GLOBAL.scriptDir,
+        cwd: global.scriptDir,
         encoding: 'utf-8'
       }
     )
